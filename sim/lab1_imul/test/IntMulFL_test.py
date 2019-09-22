@@ -104,7 +104,7 @@ def random_parsity(arr, rate):
     lst.append(k)
   mul = 31
   sum = 0
-  for ele in k:
+  for ele in lst:
     sum += ele * (2 ** mul)
     mul = mul -1
   return sum
@@ -113,7 +113,7 @@ random_paristy_msgs = []
 
 for i in xrange(100):
   a = random_parsity(arr, rate)
-  b = random.parsity(arr, rate)
+  b = random_parsity(arr, rate)
   print(a, b)
   random_paristy_msgs.extend([ req( a, b ), resp( a * b ) ])
 
