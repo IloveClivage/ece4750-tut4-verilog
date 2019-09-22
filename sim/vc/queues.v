@@ -54,7 +54,7 @@ module vc_QueueCtrl1
   logic full;
   logic full_next;
 
-  always @ (posedge clk) begin
+  always_ff @(posedge clk) begin
     full <= reset ? 1'b0 : full_next;
   end
 
@@ -295,7 +295,7 @@ module vc_QueueCtrl
   logic [c_addr_nbits-1:0] enq_ptr_inc;
   assign enq_ptr_inc = (enq_ptr_plus1 == p_num_msgs) ? {c_addr_nbits{1'b0}} : enq_ptr_plus1;
 
-  /* lint_on */
+  /* verilator lint_on WIDTH */
 
   assign deq_ptr_next
     = ( do_deq && ~do_bypass ) ? ( deq_ptr_inc ) : deq_ptr;
@@ -478,7 +478,7 @@ module vc_Queue
   // Assertions
 
   /*
-  always @( posedge clk ) begin
+  always_ff @( posedge clk ) begin
     if ( !reset ) begin
       `VC_ASSERT_NOT_X( enq_val );
       `VC_ASSERT_NOT_X( enq_rdy );
